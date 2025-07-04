@@ -3,3 +3,5 @@ db-schema: public
 spring:
   liquibase:
     drop-first: true
+  jpa:
+    show-sql: true
