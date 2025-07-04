@@ -4,6 +4,7 @@ import com.github.database.rider.core.api.dataset.DataSet;
 import com.github.database.rider.core.api.dataset.ExpectedDataSet;
 import com.itm.space.BaseIntegrationTest;
 import com.itm.space.domain.entity.TicketCategory;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,7 +33,7 @@ class TicketCategoryRepositoryIntegrationTest extends BaseIntegrationTest {
         TicketCategory foundTicketCategory = ticketCategoryRepository.findById(ticketCategoryToSave.getId())
                 .orElseThrow();
 
-        assertNotNull(foundTicketCategory);
+       Assertions.assertNotNull(foundTicketCategory);
         assertEquals(foundTicketCategory.getName(), ticketCategoryToSave.getName());
         assertEquals(foundTicketCategory.getDescription(), ticketCategoryToSave.getDescription());
     }

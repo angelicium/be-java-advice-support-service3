@@ -2,6 +2,7 @@ package com.itm.space.repository;
 
 import com.itm.space.BaseIntegrationTest;
 import com.itm.space.domain.entity.User;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -36,8 +37,8 @@ class UserRepositoryIntegrationTest extends BaseIntegrationTest {
 
         User fetсhedUser = userRepository.findById(savedUser.getId()).orElseThrow();
 
-        assertEquals(fetсhedUser.getName(), savedUser.getName());
-        assertEquals(fetсhedUser.getEmail(), savedUser.getEmail());
+        Assertions.assertEquals(fetсhedUser.getName(), savedUser.getName());
+        Assertions.assertEquals(fetсhedUser.getEmail(), savedUser.getEmail());
     }
 
     @Test
@@ -54,8 +55,7 @@ class UserRepositoryIntegrationTest extends BaseIntegrationTest {
         userRepository.save(updatedUser);
 
         User fetсhedUser = userRepository.findById(savedUser.getId()).orElseThrow();
-
-        assertEquals(fetсhedUser.getName(), updatedUser.getName());
-        assertEquals(fetсhedUser.getEmail(), updatedUser.getEmail());
+        Assertions.assertEquals(fetсhedUser.getName(), updatedUser.getName());
+        Assertions.assertEquals(fetсhedUser.getEmail(), updatedUser.getEmail());
     }
 }
