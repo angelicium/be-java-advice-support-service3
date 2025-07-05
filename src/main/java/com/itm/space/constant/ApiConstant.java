@@ -8,6 +8,6 @@ public final class ApiConstant {
 
     public static final String OPERATORS_URL = "/api/v1/operators";
 
-    public static final String TICKETS_URL = "/api/v1/tickets";
+    public static final String CREATE_TICKET_URL = "/api/v1/tickets";
 
 }
