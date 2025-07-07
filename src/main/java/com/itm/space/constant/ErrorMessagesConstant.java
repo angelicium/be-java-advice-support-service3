@@ -11,4 +11,8 @@ public class ErrorMessagesConstant {
     public final static String USER_NOT_FOUND_MESSAGE = "Пользователь не найден";
 
     public final static String INTERNAL_SERVER_ERROR = "Внутренняя ошибка сервера";
+
+    public final static String CATEGORY_NOT_FOUND_MESSAGE = "Категория не найдена";
+
+    public final static String PRIORITY_NOT_FOUND_EXCEPTION = "Приоритет не найден";
 }

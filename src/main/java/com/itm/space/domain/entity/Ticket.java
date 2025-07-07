@@ -53,7 +53,7 @@ public class Ticket {
     @Column(name = "description", nullable = false)
     private String description;
 
-    @Column(name = "sla_deadline", nullable = false)
+    @Column(name = "sla_deadline")
     private LocalDateTime slaDeadline;
 
     @Column(name = "escalated_at", nullable = false)
