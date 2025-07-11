@@ -56,6 +56,7 @@ public class OperatorControllerTest extends BaseIntegrationTest {
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.specialization").value(updateOperatorRequest.getSpecialization()))
                 .andExpect(jsonPath("$.maxTickets").value(updateOperatorRequest.getMaxTickets()));
+
     }
 
     @Test

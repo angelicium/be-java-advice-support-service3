@@ -18,7 +18,7 @@ import static com.itm.space.constant.ApiConstant.EXAMPLE_URL;
 public interface ExampleController {
 
     @PostMapping
-    @Secured(RoleConstant.USER)
-    @Operation(security = @SecurityRequirement(name = "keycloak_oauth_scheme"))
+//    @Secured(RoleConstant.USER)
+//    @Operation(security = @SecurityRequirement(name = "keycloak_oauth_scheme"))
     ExampleResponse exampleRequest(@RequestBody ExampleRequest request);
 }

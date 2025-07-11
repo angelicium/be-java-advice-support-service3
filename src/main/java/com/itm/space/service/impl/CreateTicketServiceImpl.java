@@ -53,8 +53,6 @@ public class CreateTicketServiceImpl implements CreateTicketService {
         ticket.setCreatedAt(LocalDateTime.now());
         ticket.setStatus(new TicketStatus());
 
-        ticketRepository.save(ticket);
-
-        return ticket; // нулевый айди
+       return ticketRepository.save(ticket);
     }
 }

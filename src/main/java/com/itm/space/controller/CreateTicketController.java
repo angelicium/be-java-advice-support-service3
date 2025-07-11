@@ -18,7 +18,7 @@ import static com.itm.space.constant.RoleConstant.USER;
 public interface CreateTicketController {
 
     @PostMapping()
-    @Secured(USER)
-    @Operation(security = @SecurityRequirement(name = "keycloak_oauth_scheme"))
+//    @Secured(USER)
+//    @Operation(security = @SecurityRequirement(name = "keycloak_oauth_scheme"))
     CreateTicketResponse createTicket(@RequestBody CreateTicketRequest request);
 }
