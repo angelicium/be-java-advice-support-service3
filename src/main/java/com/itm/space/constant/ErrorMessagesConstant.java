@@ -15,4 +15,6 @@ public class ErrorMessagesConstant {
     public final static String CATEGORY_NOT_FOUND_MESSAGE = "Категория не найдена";
 
     public final static String PRIORITY_NOT_FOUND_EXCEPTION = "Приоритет не найден";
+
+    public final static String STATUS_NOT_FOUND_EXCEPTION = "Статус не найден";
 }

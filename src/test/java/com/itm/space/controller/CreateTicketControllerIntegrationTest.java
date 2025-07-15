@@ -8,7 +8,6 @@ import org.junit.jupiter.api.Test;
 import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithMockUser;
 
-import static com.itm.space.constant.RoleConstant.ADMIN;
 import static com.itm.space.constant.RoleConstant.USER;
 import static com.itm.space.constant.ErrorMessagesConstant.BAD_REQUEST_MESSAGE;
 import static com.itm.space.constant.ErrorMessagesConstant.FORBIDDEN_MESSAGE;
@@ -78,7 +77,7 @@ public class CreateTicketControllerIntegrationTest extends BaseIntegrationTest {
     }
 
     @Test
-    @WithMockUser(authorities = ADMIN)
+    @WithMockUser(authorities = "OTHER_ROLE")
     @DisplayName("Создание тикета. Статус 403: Недостаточно прав пользователя")
     void shouldReturn403WhenForbidden() throws Exception {
 
