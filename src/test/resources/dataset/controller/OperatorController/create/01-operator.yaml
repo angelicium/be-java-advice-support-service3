@@ -1,0 +1,12 @@
+operator:
+  - user_id: "6aa45e75-7843-8921-b3fc-3a074a77bbb7"
+    specialization: "Тестирование"
+    max_tickets: 10
+
+users:
+  - id: "6aa45e75-7843-8921-b3fc-3a074a77bbb7"
+    name: "Некто"
+    email: "nekto@mail.ru"
+  - id: "7aa45e75-7843-8921-b3fc-3a074a77bbb7"
+    name: "Инокентий"
+    email: "kesha@mail.ru"
