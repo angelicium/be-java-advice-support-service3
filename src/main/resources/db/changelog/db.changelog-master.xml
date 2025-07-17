@@ -10,4 +10,5 @@ http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
     <include file="/db/changelog/changeset/2025/06/23/rename-table-user-to-users.sql"/>
     <include file="/db/changelog/changeset/2025/05/28/create-table-ticket-priority.sql"/>
     <include file="/db/changelog/changeset/2025/05/28/create-table-ticket.sql"/>
+    <include file="/db/changelog/changeset/2025/07/13/create_table_attachment.sql"/>
 </databaseChangeLog>
