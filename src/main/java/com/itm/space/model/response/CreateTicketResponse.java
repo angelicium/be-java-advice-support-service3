@@ -1,6 +1,5 @@
 package com.itm.space.model.response;
 
-import com.itm.space.domain.entity.TicketPriority;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

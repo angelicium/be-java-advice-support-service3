@@ -1,7 +1,6 @@
 package com.itm.space.service.impl;
 
 import com.itm.space.domain.entity.Ticket;
-import com.itm.space.domain.entity.TicketStatus;
 import com.itm.space.model.request.CreateTicketRequest;
 import com.itm.space.model.response.CreateTicketResponse;
 import com.itm.space.repository.TicketCategoryRepository;
@@ -10,19 +9,16 @@ import com.itm.space.repository.TicketRepository;
 import com.itm.space.repository.TicketStatusRepository;
 import com.itm.space.repository.UserRepository;
 import com.itm.space.service.CreateTicketService;
-import com.itm.space.util.SecurityUtil;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
-import java.util.Objects;
 import java.util.UUID;
 
 import static com.itm.space.constant.ErrorMessagesConstant.CATEGORY_NOT_FOUND_MESSAGE;
 import static com.itm.space.constant.ErrorMessagesConstant.PRIORITY_NOT_FOUND_EXCEPTION;
-import static com.itm.space.constant.ErrorMessagesConstant.USER_NOT_FOUND_MESSAGE;
-import static com.itm.space.util.SecurityUtil.getCurrentUserId;
+import static com.itm.space.constant.ErrorMessagesConstant.STATUS_NOT_FOUND_EXCEPTION;
 
 @Service
 @AllArgsConstructor
@@ -54,16 +50,12 @@ public class CreateTicketServiceImpl implements CreateTicketService {
 
         Ticket ticket = new Ticket();
         ticket.setId(UUID.randomUUID());
-        ticket.setUser(userRepository.findById(getCurrentUserId()).orElseThrow(() -> new EntityNotFoundException(USER_NOT_FOUND_MESSAGE)));
         ticket.setCategory(ticketCategoryRepository.findById(request.getCategoryId()).orElseThrow(() -> new EntityNotFoundException(CATEGORY_NOT_FOUND_MESSAGE)));
         ticket.setPriority(ticketPriorityRepository.findById(request.getPriorityId()).orElseThrow(() -> new EntityNotFoundException(PRIORITY_NOT_FOUND_EXCEPTION)));
+        ticket.setStatus(ticketStatusRepository.findById(1).orElseThrow(() -> new EntityNotFoundException(STATUS_NOT_FOUND_EXCEPTION)));
         ticket.setTitle(request.getTitle());
         ticket.setDescription(request.getDescription());
         ticket.setCreatedAt(LocalDateTime.now());
-        TicketStatus newStatus = new TicketStatus();
-        newStatus.setId(1);
-        newStatus.setName("New");
-        ticket.setStatus(newStatus);
 
         return ticketRepository.save(ticket);
     }
