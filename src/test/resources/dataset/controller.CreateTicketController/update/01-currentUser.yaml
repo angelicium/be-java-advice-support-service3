@@ -1,0 +1,4 @@
+users:
+  - id: "6aa45e75-7843-8921-b3fc-3a074a77bbb7"
+    name: "user"
+    email: "testEmail"

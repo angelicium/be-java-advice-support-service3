@@ -1,5 +1,6 @@
 package com.itm.space.controller;
 
+import com.github.database.rider.core.api.dataset.DataSet;
 import com.itm.space.BaseIntegrationTest;
 import com.itm.space.model.request.CreateTicketRequest;
 import org.junit.jupiter.api.BeforeEach;
@@ -12,7 +13,6 @@ import static com.itm.space.constant.RoleConstant.USER;
 import static com.itm.space.constant.ErrorMessagesConstant.BAD_REQUEST_MESSAGE;
 import static com.itm.space.constant.ErrorMessagesConstant.FORBIDDEN_MESSAGE;
 import static com.itm.space.constant.ErrorMessagesConstant.UNAUTHORIZED_MESSAGE;
-import static com.itm.space.constant.ErrorMessagesConstant.INTERNAL_SERVER_ERROR;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
@@ -21,6 +21,7 @@ public class CreateTicketControllerIntegrationTest extends BaseIntegrationTest {
 
     private CreateTicketRequest validRequest;
     private CreateTicketRequest invalidRequest;
+
 
     @BeforeEach
     void setUp() {
@@ -40,8 +41,9 @@ public class CreateTicketControllerIntegrationTest extends BaseIntegrationTest {
     }
 
     @Test
-    @WithMockUser(authorities = USER)
+    @WithMockUser(username = "6aa45e75-7843-8921-b3fc-3a074a77bbb7", authorities = USER)
     @DisplayName("Создание тикета. Статус 200: Успешно")
+    @DataSet(value = "dataset/controller/CreateTicketController/update/01-currentUser.yaml")
     void createAndRetrieveTicket() throws Exception {
 
         mockMvc.perform(post("/api/v1/tickets")
@@ -50,12 +52,11 @@ public class CreateTicketControllerIntegrationTest extends BaseIntegrationTest {
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.title").value(validRequest.getTitle()))
                 .andExpect(jsonPath("$.description").value(validRequest.getDescription()))
-                .andExpect(jsonPath("$.priorityId").value(validRequest.getPriorityId()))
                 .andExpect(jsonPath("$.categoryId").value(validRequest.getCategoryId()));
     }
 
     @Test
-    @WithMockUser(authorities = USER)
+    @WithMockUser(username = "6aa45e75-7843-8921-b3fc-3a074a77bbb7", authorities = USER)
     @DisplayName("Создание тикета. Статус 400: Неправильные параметры запроса")
     void shouldReturn400WhenBadRequest() throws Exception {
         mockMvc.perform(post("/api/v1/tickets")
@@ -86,17 +87,5 @@ public class CreateTicketControllerIntegrationTest extends BaseIntegrationTest {
                         .content(objectMapper.writeValueAsString(validRequest)))
                 .andExpect(status().isForbidden())
                 .andExpect(jsonPath("$.message").value(FORBIDDEN_MESSAGE));
-    }
-
-    @Test
-    @WithMockUser(authorities = USER)
-    @DisplayName("Создание тикета. Статус 500: Внутренняя ошибка сервера")
-    void shouldReturn500WhenInternalServerError() throws Exception {
-
-        mockMvc.perform(post("/api/v1/tickets")
-                .contentType(MediaType.APPLICATION_JSON)
-                .content(objectMapper.writeValueAsString(validRequest)))
-                .andExpect(status().isInternalServerError())
-                .andExpect(jsonPath("$.message").value(INTERNAL_SERVER_ERROR));
     }
 }

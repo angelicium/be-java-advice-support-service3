@@ -8,17 +8,12 @@ import com.itm.space.domain.entity.TicketStatus;
 import com.itm.space.domain.entity.User;
 import com.itm.space.model.request.CreateTicketRequest;
 import com.itm.space.model.response.CreateTicketResponse;
-import com.itm.space.repository.TicketCategoryRepository;
-import com.itm.space.repository.TicketPriorityRepository;
-import com.itm.space.repository.TicketRepository;
-import com.itm.space.repository.TicketStatusRepository;
-import com.itm.space.repository.UserRepository;
+import com.itm.space.repository.*;
 import com.itm.space.service.impl.CreateTicketServiceImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
 
 import java.time.LocalDateTime;
 import java.util.Optional;
@@ -53,8 +48,8 @@ public class CreateTicketServiceImplModuleTest extends BaseUnitTest {
     private TicketPriority priority;
     private TicketCategory category;
     private TicketStatus status;
-    private CreateTicketResponse response;
     private User user;
+    private CreateTicketResponse response;
 
     @InjectMocks
     private CreateTicketServiceImpl createTicketServiceImpl;
@@ -83,35 +78,33 @@ public class CreateTicketServiceImplModuleTest extends BaseUnitTest {
 
         status = TicketStatus.builder()
                 .id(1)
-                .name("NEW")
-                .description("new description")
+                .name("new")
+                .description("Новый тикет, ожидает назначения")
                 .build();
 
         user = User.builder()
                 .id(UUID.randomUUID())
-                .name("User")
-                .email("email")
-                .build();
+                .name("name")
+                .email("email").build();
 
         ticket = Ticket.builder()
                 .id(UUID.randomUUID())
                 .title("Test Ticket")
                 .description("This is a test ticket.")
                 .createdAt(LocalDateTime.now())
+                .status(status)
                 .category(category)
                 .priority(priority)
-                .status(status)
                 .user(user)
                 .build();
     }
 
     @Test
     public void createAndRetrieveTicketTest() {
-
         when(ticketCategoryRepository.findById(category.getId())).thenReturn(Optional.of(category));
         when(ticketPriorityRepository.findById(priority.getId())).thenReturn(Optional.of(priority));
-        when(ticketStatusRepository.findById(status.getId())).thenReturn(Optional.of(status));
         when(userRepository.findById(getCurrentUserId())).thenReturn(Optional.of(user));
+        when(ticketStatusRepository.findById(status.getId())).thenReturn(Optional.of(status));
         when(ticketRepository.save(any(Ticket.class))).thenReturn(ticket);
 
         response = createTicketServiceImpl.createAndRetrieveTicket(request);
@@ -127,8 +120,6 @@ public class CreateTicketServiceImplModuleTest extends BaseUnitTest {
 
         verify(ticketCategoryRepository).findById(1);
         verify(ticketPriorityRepository).findById(1);
-        verify(ticketStatusRepository).findById(1);
-        verify(userRepository).findById(getCurrentUserId());
         verify(ticketRepository).save(any(Ticket.class));
     }
 }

@@ -5,6 +5,7 @@ import com.itm.space.model.response.CreateTicketResponse;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -20,5 +21,5 @@ public interface CreateTicketController {
     @PostMapping()
     @Secured(USER)
     @Operation(security = @SecurityRequirement(name = "keycloak_oauth_scheme"))
-    CreateTicketResponse createTicket(@RequestBody CreateTicketRequest request);
+    CreateTicketResponse createTicket(@RequestBody @Valid CreateTicketRequest request);
 }

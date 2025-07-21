@@ -14,11 +14,12 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
-import java.util.UUID;
 
 import static com.itm.space.constant.ErrorMessagesConstant.CATEGORY_NOT_FOUND_MESSAGE;
 import static com.itm.space.constant.ErrorMessagesConstant.PRIORITY_NOT_FOUND_EXCEPTION;
 import static com.itm.space.constant.ErrorMessagesConstant.STATUS_NOT_FOUND_EXCEPTION;
+import static com.itm.space.constant.ErrorMessagesConstant.USER_NOT_FOUND_MESSAGE;
+import static com.itm.space.util.SecurityUtil.getCurrentUserId;
 
 @Service
 @AllArgsConstructor
@@ -47,15 +48,15 @@ public class CreateTicketServiceImpl implements CreateTicketService {
     }
 
     private Ticket ticketInit(CreateTicketRequest request) {
-
         Ticket ticket = new Ticket();
-        ticket.setId(UUID.randomUUID());
+        ticket.setId(getCurrentUserId());
+        ticket.setUser(userRepository.findById(getCurrentUserId()).orElseThrow(() -> new EntityNotFoundException(USER_NOT_FOUND_MESSAGE)));
         ticket.setCategory(ticketCategoryRepository.findById(request.getCategoryId()).orElseThrow(() -> new EntityNotFoundException(CATEGORY_NOT_FOUND_MESSAGE)));
         ticket.setPriority(ticketPriorityRepository.findById(request.getPriorityId()).orElseThrow(() -> new EntityNotFoundException(PRIORITY_NOT_FOUND_EXCEPTION)));
-        ticket.setStatus(ticketStatusRepository.findById(1).orElseThrow(() -> new EntityNotFoundException(STATUS_NOT_FOUND_EXCEPTION)));
         ticket.setTitle(request.getTitle());
         ticket.setDescription(request.getDescription());
         ticket.setCreatedAt(LocalDateTime.now());
+        ticket.setStatus(ticketStatusRepository.findById(1).orElseThrow(() -> new EntityNotFoundException(STATUS_NOT_FOUND_EXCEPTION)));
 
         return ticketRepository.save(ticket);
     }
