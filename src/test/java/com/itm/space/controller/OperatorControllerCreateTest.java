@@ -55,9 +55,9 @@ public class OperatorControllerCreateTest extends BaseIntegrationTest {
     @Test
     @DisplayName("Создание оператора. Статус 201 - успешно")
     @WithMockUser(authorities = RoleConstant.ADMIN)
-    @DataSet(value = "dataset/controller/OperatorController/create/01-operator.yaml",
+    @DataSet(value = "dataset/OperatorController.create/01-operator.yaml",
         cleanBefore = true, cleanAfter = true)
-    @ExpectedDataSet(value = "dataset/controller/OperatorController/create/01-expectedOperator.yaml",
+    @ExpectedDataSet(value = "dataset/OperatorController.create/01-expectedOperator.yaml",
         ignoreCols = {"id", "created_at"}, orderBy = {"user_id"})
     void createOperator_shouldReturnNewOperatorData() throws Exception {
         mockMvc.perform(post(OPERATORS_URL)
@@ -106,7 +106,7 @@ public class OperatorControllerCreateTest extends BaseIntegrationTest {
     @Test
     @DisplayName("Создание оператора. Статус 404 - юзера не существует")
     @WithMockUser(authorities = RoleConstant.ADMIN)
-    @DataSet(value = "dataset/controller/OperatorController/create/01-operator.yaml",
+    @DataSet(value = "dataset/OperatorController.create/01-operator.yaml",
         cleanBefore = true, cleanAfter = true)
     void createOperator_shouldReturnUserNotFound() throws Exception {
         mockMvc.perform(post(OPERATORS_URL)

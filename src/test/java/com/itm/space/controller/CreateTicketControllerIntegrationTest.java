@@ -43,7 +43,7 @@ public class CreateTicketControllerIntegrationTest extends BaseIntegrationTest {
     @Test
     @WithMockUser(username = "6aa45e75-7843-8921-b3fc-3a074a77bbb7", authorities = USER)
     @DisplayName("Создание тикета. Статус 200: Успешно")
-    @DataSet(value = "dataset/controller/CreateTicketController/update/01-currentUser.yaml")
+    @DataSet(value = "dataset/update/01-currentUser.yaml")
     void createAndRetrieveTicket() throws Exception {
 
         mockMvc.perform(post("/api/v1/tickets")
