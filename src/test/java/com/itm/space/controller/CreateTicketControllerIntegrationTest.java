@@ -13,6 +13,7 @@ import static com.itm.space.constant.RoleConstant.USER;
 import static com.itm.space.constant.ErrorMessagesConstant.BAD_REQUEST_MESSAGE;
 import static com.itm.space.constant.ErrorMessagesConstant.FORBIDDEN_MESSAGE;
 import static com.itm.space.constant.ErrorMessagesConstant.UNAUTHORIZED_MESSAGE;
+import static com.itm.space.constant.ErrorMessagesConstant.INTERNAL_SERVER_ERROR;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
@@ -21,7 +22,6 @@ public class CreateTicketControllerIntegrationTest extends BaseIntegrationTest {
 
     private CreateTicketRequest validRequest;
     private CreateTicketRequest invalidRequest;
-
 
     @BeforeEach
     void setUp() {

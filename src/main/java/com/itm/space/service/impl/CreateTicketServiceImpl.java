@@ -1,6 +1,7 @@
 package com.itm.space.service.impl;
 
 import com.itm.space.domain.entity.Ticket;
+import com.itm.space.domain.entity.TicketStatus;
 import com.itm.space.model.request.CreateTicketRequest;
 import com.itm.space.model.response.CreateTicketResponse;
 import com.itm.space.repository.TicketCategoryRepository;
@@ -9,11 +10,14 @@ import com.itm.space.repository.TicketRepository;
 import com.itm.space.repository.TicketStatusRepository;
 import com.itm.space.repository.UserRepository;
 import com.itm.space.service.CreateTicketService;
+import com.itm.space.util.SecurityUtil;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.Objects;
+import java.util.UUID;
 
 import static com.itm.space.constant.ErrorMessagesConstant.CATEGORY_NOT_FOUND_MESSAGE;
 import static com.itm.space.constant.ErrorMessagesConstant.PRIORITY_NOT_FOUND_EXCEPTION;
@@ -48,6 +52,7 @@ public class CreateTicketServiceImpl implements CreateTicketService {
     }
 
     private Ticket ticketInit(CreateTicketRequest request) {
+
         Ticket ticket = new Ticket();
         ticket.setId(getCurrentUserId());
         ticket.setUser(userRepository.findById(getCurrentUserId()).orElseThrow(() -> new EntityNotFoundException(USER_NOT_FOUND_MESSAGE)));

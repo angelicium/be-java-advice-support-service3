@@ -1,5 +1,6 @@
 package com.itm.space.model.request;
 
+import com.itm.space.domain.entity.TicketPriority;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
